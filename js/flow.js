@@ -43,6 +43,8 @@ if (typeof window.oauthflow === 'undefined') {
           var values = p.split('=');
           parameters[values[0]] = values[1];
         });
+	
+	console.log('xxxxxxxxxx: ' + parameters);
 
         window.opener.postMessage(parameters,
                                   oauthflow.params[service][APP_ORIGIN]);

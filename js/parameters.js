@@ -4,7 +4,7 @@ oauthflow.params = {
 
   facebook: {
     appOrigin:
-      'app://communications.gaiamobile.org',
+      'app://calendar.gaiamobile.org',
     redirectURI:
       'http://intense-tundra-4122.herokuapp.com/fbowd/oauth2_new/flow.html',
     loginPage:
@@ -22,7 +22,7 @@ oauthflow.params = {
 
   live: {
     appOrigin:
-      'app://communications.gaiamobile.org',
+      'app://calendar.gaiamobile.org',
     redirectURI:
       'http://intense-tundra-4122.herokuapp.com/fbowd/oauth2_new/flow_live.html',
     loginPage:
