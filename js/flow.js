@@ -52,6 +52,7 @@ if (typeof window.oauthflow === 'undefined') {
         // Finally the window is closed
         window.close();
       }
+      window.close();
     } // init
 
 
