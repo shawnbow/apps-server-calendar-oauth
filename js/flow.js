@@ -32,27 +32,12 @@ if (typeof window.oauthflow === 'undefined') {
      *
      */
     OAuthFlow.init = function(service) {
-      var hash = document.location.hash.substring(1);
-      var parameters = {};
+      var msg = document.location.toString();
 
-      var dataStart = hash.indexOf('access_token');
-      if (dataStart !== -1) {
-        var elements = hash.split('&');
+      console.log('xxxxxxxxxx: ' + msg);
 
-        elements.forEach(function(p) {
-          var values = p.split('=');
-          parameters[values[0]] = values[1];
-        });
-	
-	console.log('xxxxxxxxxx: ' + parameters);
-
-        window.opener.postMessage(parameters,
-                                  oauthflow.params[service][APP_ORIGIN]);
-
-        // Finally the window is closed
-        window.close();
-      }
-      window.close();
+      window.opener.postMessage(msg,
+                                oauthflow.params[service][APP_ORIGIN]);
     } // init
 
 
