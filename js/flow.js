@@ -1,85 +1,22 @@
 /*
- *  Module: Facebook integration
+ *  Module: Calendar OAuth2.0 token flow
  *
- *  This script file contains all the logic that allows to obtain an access
- *  token through an OAuth 2.0 implicit grant flow
- *
- *
+ *  This script file post the redirect location which containing the OAuth2 access
+ *  token back to window opener.
  *
  */
-
 if (typeof window.oauthflow === 'undefined') {
   (function(document) {
     'use strict';
+    var APP_ORIGIN = 'appOrigin';
 
     var OAuthFlow = window.oauthflow = {};
 
-    var OAUTH_REDIRECT = 'redirectURI';
-    var ENDPOINT = 'loginPage';
-    var APP_ID = 'applicationId';
-    var APP_ORIGIN = 'appOrigin';
-    var SCOPE = 'scope';
-
-    // The access token
-    var accessToken;
-    // hash to get the token
-    var hash = window.location.hash;
-    // Access Token parameter
-    var ACC_T = 'access_token';
-
-    /**
-     *  Initialization function it tries to find an access token
-     *
-     */
-    OAuthFlow.init = function(service) {
+    OAuthFlow.handle = function(service) {
       var msg = document.location.toString();
-
       console.log('xxxxxxxxxx: ' + msg);
 
-      window.opener.postMessage(msg,
-                                oauthflow.params[service][APP_ORIGIN]);
-    } // init
-
-
-    OAuthFlow.start = function(state, service) {
-      getAccessToken(state, service);
+      window.opener.postMessage(msg, oauthflow.params[service][APP_ORIGIN]);
     }
-
-
-    /**
-     *  Obtains the access token. The access token is retrieved from the local
-     *  storage and if not present a OAuth 2.0 flow is started
-     *
-     *
-     */
-    function getAccessToken(state, service) {
-      startOAuth(state, service);
-    }
-
-    /**
-     *  Starts a OAuth 2.0 flow to obtain the user information
-     *
-     */
-    function startOAuth(state, service) {
-      var params = oauthflow.params[service];
-
-      var redirect_uri = encodeURIComponent(params[OAUTH_REDIRECT]);
-
-      var scope = params[SCOPE].join(',');
-      var scopeParam = encodeURIComponent(scope);
-
-      var queryParams = ['client_id=' + params[APP_ID],
-                          'redirect_uri=' + redirect_uri,
-                          'response_type=token',
-                          'scope=' + scopeParam,
-                          'state=' + state
-      ]; // Query params
-
-    var query = queryParams.join('&');
-    var url = params[ENDPOINT] + query;
-
-    window.open(url);
-  }
-
   })(document);
 }

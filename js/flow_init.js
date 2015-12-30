@@ -1,3 +1,3 @@
 'use strict';
 
-oauthflow.init('live');
+oauthflow.handle('google');
